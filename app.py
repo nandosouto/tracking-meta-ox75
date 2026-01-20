@@ -89,6 +89,11 @@ def send_event_to_meta(event_name, user_data, custom_data=None, event_source_url
 
         if custom_data:
             event_payload['custom_data'] = custom_data
+            
+        # [REINFORÇO] Se tiver UTMs no user_data/payload mas não entraram no custom_data, vamos garantir
+        # O ideal é que UTMs venham via URL (event_source_url), mas adicionar no custom_data ajuda na depuração
+        # e em alguns relatórios personalizados.
+        # (Nota: O código chamador deve passar usá-los se extraídos)
 
         # Payload final (array de eventos)
         final_payload = {
