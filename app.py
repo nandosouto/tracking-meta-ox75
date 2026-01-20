@@ -299,6 +299,14 @@ def meta_webhook():
             }
             send_event_to_meta('CompleteRegistration', user_data, custom_data, event_source_url, event_id=event_id_unique)
             
+            # Evento Secundário (Qualidade): ViewContent
+            vc_data = {
+                'currency': 'BRL',
+                'value': 0.0,
+                'content_name': 'Registration Success Page'
+            }
+            send_event_to_meta('ViewContent', user_data, vc_data, event_source_url, event_id=str(uuid.uuid4()))
+            
         # --- 2. USER_LOGIN -> Lead ---
         elif event_type == 'USER_LOGIN':
             custom_data = {
@@ -307,6 +315,14 @@ def meta_webhook():
                 'content_name': 'Login'
             }
             send_event_to_meta('Lead', user_data, custom_data, event_source_url, event_id=event_id_unique)
+
+            # Evento Secundário (Qualidade): ViewContent
+            vc_data = {
+                'currency': 'BRL',
+                'value': 0.0,
+                'content_name': 'Login Page View'
+            }
+            send_event_to_meta('ViewContent', user_data, vc_data, event_source_url, event_id=str(uuid.uuid4()))
             
         # --- 3. DEPOSIT_CREATED -> InitiateCheckout AND AddToCart ---
         elif event_type == 'DEPOSIT_CREATED':
