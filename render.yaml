@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: tiktok-ads-webhook
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      # IMPORTANTE: Configure as seguintes variáveis de ambiente no painel do Render para o Meta Ads:
+      # - META_PIXEL_ID: 1810756586220053
+      # - META_ACCESS_TOKEN: (Seu token aqui - EAAKe...)
+      # Vá em: Settings > Environment > Add Environment Variable
